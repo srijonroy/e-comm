@@ -1,9 +1,10 @@
 import { useState } from "react";
 
-const useSignUpForm = () => {
+const useSignUpForm = (callback) => {
     const [form,setForm] = useState({email:'',password:''});
     const handleSubmit = (event) => {
         event.preventDefault();
+        callback();
         reset();
     }
     const handleChange = event => {

@@ -3,11 +3,18 @@ import useSignUpForm from "../../hooks/useSignUpForm";
 import "./SignIn.scss";
 import FormInput from "../form-input/FormInput";
 import Button from "../Button/Button";
-import { signInWithGoogle } from "../../firebase/firebase.utils";
+import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
 
 const SignIn = () => {
-  const { form, handleChange, handleSubmit } = useSignUpForm();
-
+  const postSignIn = async () => {
+    const { email, password } = form;
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const { form, handleChange, handleSubmit } = useSignUpForm(postSignIn);
   return (
     <div className="sign-in">
       <h2>I already have an account</h2>
