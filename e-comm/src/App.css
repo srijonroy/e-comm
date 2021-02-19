@@ -1,0 +1,16 @@
+body {
+  font-family: "Open Sans Condensed";
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.App {
+  margin: 0 50px;
+}
+
+* {
+  box-sizing: border-box;
+}
