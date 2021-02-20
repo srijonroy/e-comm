@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./header.scss";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/4.3 crown.svg";
 import { auth } from "../../firebase/firebase.utils";
 import { connect } from "react-redux";
+import CartIcon from "../cart-icon/CartIcon";
+import CartDropdown from "../cart-dropdown/CartDropdown";
+import { toggleDropDown } from "../../redux/cart/cart.actions";
 
-const Header = ({ currentUser }) => {
+const Header = ({ currentUser, hidden }) => {
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -27,14 +30,17 @@ const Header = ({ currentUser }) => {
             SIGN IN
           </Link>
         )}
+        <CartIcon />
       </div>
+      {hidden ? <CartDropdown /> : null}
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => {
   return {
-    currentUser: state.user.currentUser,
+    currentUser,
+    hidden,
   };
 };
 
