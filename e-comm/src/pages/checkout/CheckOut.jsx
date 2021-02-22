@@ -5,6 +5,7 @@ import CheckOutItem from "../../component/checkout-item/CheckOutItem";
 
 const CheckOut = () => {
   const { cartItems } = useSelector((state) => state.cart);
+
   const totalPrice =
     cartItems.length > 0
       ? cartItems.reduce((total, item) => {
@@ -22,7 +23,9 @@ const CheckOut = () => {
           <span>Description</span>
         </div>
         <div className="header-block">
-          <span>Quantity</span>
+          <span>
+            <span className="quantity">Quantity</span>
+          </span>
         </div>
         <div className="header-block">
           <span>Price</span>
@@ -32,7 +35,7 @@ const CheckOut = () => {
         </div>
       </div>
       {cartItems.map((item) => {
-        return <CheckOutItem {...item}></CheckOutItem>;
+        return <CheckOutItem key={item.id} {...item}></CheckOutItem>;
       })}
       <div className="total">
         <span>TOTAL:{totalPrice}$</span>

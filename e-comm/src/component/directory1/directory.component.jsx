@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import MenuItem from "../menu-item/menu-item.component";
-import { sectionsToShow } from "../../data";
 import "./directory.styles.scss";
+import { useSelector } from "react-redux";
 
 const Directory = () => {
-  const [sections] = useState(sectionsToShow);
+  const { sections } = useSelector((state) => state.directory);
 
   return (
     <div className="directory-menu">
