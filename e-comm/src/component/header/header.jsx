@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./header.scss";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/4.3 crown.svg";
@@ -6,7 +6,6 @@ import { auth } from "../../firebase/firebase.utils";
 import { connect } from "react-redux";
 import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/CartDropdown";
-import { toggleDropDown } from "../../redux/cart/cart.actions";
 
 const Header = ({ currentUser, hidden }) => {
   return (
@@ -32,7 +31,7 @@ const Header = ({ currentUser, hidden }) => {
         )}
         <CartIcon />
       </div>
-      {hidden ? <CartDropdown /> : null}
+      {!hidden ? <CartDropdown /> : null}
     </div>
   );
 };
