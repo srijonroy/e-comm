@@ -4,11 +4,18 @@ import CollectionItem from "../../component/collection-item/collection-item.comp
 import "./Collection.scss";
 
 const Collection = ({ match }) => {
-  const { SHOP_DATA } = useSelector((state) => state.shop);
+  const { collections } = useSelector((state) => state.shop);
+  let collectionChosen = null;
 
-  const { title, items } = SHOP_DATA.find(
-    (item) => item.routeName === match.params.categoryId
-  );
+  for (let item in collections) {
+    if (collections[item].routeName === match.params.categoryId) {
+      collectionChosen = collections[item];
+      break;
+    }
+  }
+  console.log(collectionChosen);
+
+  const { title, items } = collectionChosen;
 
   return (
     <div className="collection-page">

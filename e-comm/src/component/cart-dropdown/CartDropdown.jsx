@@ -28,7 +28,7 @@ const CartDropdown = () => {
           <span className="empty-message">Your Cart is Empty</span>
         )}
       </div>
-      <Button onClick={redirectToCheckout}>GO TO CHECKOUT</Button>
+      <Button click={redirectToCheckout}>GO TO CHECKOUT</Button>
     </div>
   );
 };

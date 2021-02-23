@@ -1,9 +1,10 @@
 import React from "react";
 import useSignUpForm from "../../hooks/useSignUpForm";
-import "./SignIn.scss";
 import FormInput from "../form-input/FormInput";
 import Button from "../Button/Button";
 import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
+import { SignInContainer } from "./SignIn.styles";
+import { ButtonContainer } from "./SignIn.styles";
 
 const SignIn = () => {
   const postSignIn = async () => {
@@ -16,7 +17,7 @@ const SignIn = () => {
   };
   const { form, handleChange, handleSubmit } = useSignUpForm(postSignIn);
   return (
-    <div className="sign-in">
+    <SignInContainer>
       <h2>I already have an account</h2>
       <span>Sign In with Email and Password</span>
       <form onSubmit={handleSubmit}>
@@ -36,14 +37,14 @@ const SignIn = () => {
           label="password"
           required
         ></FormInput>
-        <div className="buttons">
+        <ButtonContainer>
           <Button type="submit">Sign In</Button>
-          <Button onClick={signInWithGoogle} isGoogle>
+          <Button isGoogleSignIn onClick={signInWithGoogle}>
             Sign In With Google
           </Button>
-        </div>
+        </ButtonContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 
