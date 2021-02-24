@@ -6,22 +6,23 @@ import { createStructuredSelector } from "reselect";
 import "./App.css";
 import HeaderComponent from "./component/header/header";
 
-import {
-  auth,
-  createUserProfileDocument,
-} from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import CheckOut from "./pages/checkout/CheckOut";
 import { HomePage } from "./pages/homepage/homepage.component";
 import Shop from "./pages/shop/shop.component";
 import SignInSignUp from "./pages/signIn-signUp/signIn-signUp";
+import { checkUserSession } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
+  componentDidMount() {
+    const { checkUserSession } = this.props;
+    checkUserSession();
   }
+
+  componentWillUnmount() {}
 
   render() {
     return (
@@ -43,8 +44,13 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
 });
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    checkUserSession: () => dispatch(checkUserSession()),
+  };
+};
 
-export default connect(mapStateToProps, null)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

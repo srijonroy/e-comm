@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import "./CheckOutItem.scss";
 import {
-  ClearItemFromCart,
+  clearItemFromCart,
   removeItem,
   addItem,
 } from "../../redux/cart/cart.actions";
@@ -12,7 +12,7 @@ const CheckOutItem = (item) => {
   const dispatch = useDispatch();
 
   const clearItemFromCart = (item) => {
-    dispatch(ClearItemFromCart(item));
+    dispatch(clearItemFromCart(item));
   };
 
   return (

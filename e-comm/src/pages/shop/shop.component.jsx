@@ -8,21 +8,14 @@ import {
   convertCollectionsSnapshotToMap,
 } from "../../firebase/firebase.utils";
 import { useDispatch } from "react-redux";
-import {
-  fetchCollectionsStart,
-} from "../../redux/shopData/shop.actions";
 import WithSpinner from "../../component/withSpinner/withSpinner.component";
+import { withCollections } from "../../hoc/withCollections";
 
 const Shop = ({ match }) => {
-  const dispatch = useDispatch();
   const [loading, setstate] = useState(true);
   const CollectionsOverviewWithSpinner = WithSpinner(CollectionOverview);
   const CollectionWithSpinner = WithSpinner(Collection);
 
-  useEffect(() => {
-    dispatch(fetchCollectionsStart());
-    return () => {};
-  }, []);
 
   return (
     <div className="shop-page">
@@ -43,4 +36,4 @@ const Shop = ({ match }) => {
   );
 };
 
-export default Shop;
+export default withCollections(Shop);

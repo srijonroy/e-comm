@@ -1,19 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import CollectionItem from "../../component/collection-item/collection-item.component";
+import { withCollections } from "../../hoc/withCollections";
 import "./Collection.scss";
 
-const Collection = ({ match }) => {
-  const { collections } = useSelector((state) => state.shop);
+const Collection = ({ match, collections }) => {
   let collectionChosen = null;
 
   for (let item in collections) {
     if (collections[item].routeName === match.params.categoryId) {
       collectionChosen = collections[item];
-      break;
     }
   }
-  console.log(collectionChosen);
 
   const { title, items } = collectionChosen;
 
@@ -29,4 +26,4 @@ const Collection = ({ match }) => {
   );
 };
 
-export default Collection;
+export default withCollections(Collection);

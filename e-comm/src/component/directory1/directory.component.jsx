@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import MenuItem from "../menu-item/menu-item.component";
 import "./directory.styles.scss";
 import { useSelector } from "react-redux";
+import { withCollections } from "../../hoc/withCollections";
 
 const Directory = () => {
   const { sections } = useSelector((state) => state.directory);
@@ -15,4 +16,4 @@ const Directory = () => {
   );
 };
 
-export default Directory;
+export default withCollections(Directory);

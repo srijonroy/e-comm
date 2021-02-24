@@ -4,7 +4,7 @@ import CartItem from "../cart-item/CartItem";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { toggleDropDown } from "../../redux/cart/cart.actions";
+import { toggleCartHidden } from "../../redux/cart/cart.actions";
 import CustomButton from "../Button/Button";
 
 const CartDropdown = () => {
@@ -14,7 +14,7 @@ const CartDropdown = () => {
 
   const redirectToCheckout = () => {
     history.push("/checkout");
-    dispatch(toggleDropDown());
+    dispatch(toggleCartHidden());
   };
 
   return (
@@ -28,7 +28,7 @@ const CartDropdown = () => {
           <span className="empty-message">Your Cart is Empty</span>
         )}
       </div>
-      <CustomButton click={redirectToCheckout}>GO TO CHECKOUT</CustomButton>
+      <CustomButton onClick={redirectToCheckout}>GO TO CHECKOUT</CustomButton>
     </div>
   );
 };
