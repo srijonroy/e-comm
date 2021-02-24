@@ -2,16 +2,17 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import "./CheckOutItem.scss";
 import {
-  clearItemFromCart,
+  
   removeItem,
   addItem,
+  clearItemFromCart,
 } from "../../redux/cart/cart.actions";
 
 const CheckOutItem = (item) => {
   const { name, imageUrl, price, quantity } = item;
   const dispatch = useDispatch();
 
-  const clearItemFromCart = (item) => {
+  const clearItemsFromCart = (item) => {
     dispatch(clearItemFromCart(item));
   };
 
@@ -31,7 +32,7 @@ const CheckOutItem = (item) => {
         </div>
       </span>
       <span className="price">{price}</span>
-      <div className="remove-button" onClick={() => clearItemFromCart(item)}>
+      <div className="remove-button" onClick={() => clearItemsFromCart(item)}>
         &#10005;
       </div>
     </div>
