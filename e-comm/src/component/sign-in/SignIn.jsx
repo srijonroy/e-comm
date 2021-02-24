@@ -1,20 +1,22 @@
 import React from "react";
 import useSignUpForm from "../../hooks/useSignUpForm";
 import FormInput from "../form-input/FormInput";
-import Button from "../Button/Button";
-import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
-import { SignInContainer } from "./SignIn.styles";
-import { ButtonContainer } from "./SignIn.styles";
+import { ButtonsBarContainer, SignInContainer } from "./SignIn.styles";
+import { useDispatch } from "react-redux";
+import {
+  googleSignInStart,
+  emailSignInStart,
+} from "../../redux/user/user.actions";
+import CustomButton from "../Button/Button";
 
 const SignIn = () => {
+  const dispatch = useDispatch();
+
   const postSignIn = async () => {
     const { email, password } = form;
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-    } catch (err) {
-      console.log(err);
-    }
+    dispatch(emailSignInStart({ email, password }));
   };
+
   const { form, handleChange, handleSubmit } = useSignUpForm(postSignIn);
   return (
     <SignInContainer>
@@ -37,12 +39,16 @@ const SignIn = () => {
           label="password"
           required
         ></FormInput>
-        <ButtonContainer>
-          <Button type="submit">Sign In</Button>
-          <Button isGoogleSignIn onClick={signInWithGoogle}>
+        <ButtonsBarContainer>
+          <CustomButton type="submit">Sign In</CustomButton>
+          <CustomButton
+            type="button"
+            isGoogleSignIn
+            onClick={() => dispatch(googleSignInStart())}
+          >
             Sign In With Google
-          </Button>
-        </ButtonContainer>
+          </CustomButton>
+        </ButtonsBarContainer>
       </form>
     </SignInContainer>
   );

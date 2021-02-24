@@ -8,7 +8,9 @@ import {
   convertCollectionsSnapshotToMap,
 } from "../../firebase/firebase.utils";
 import { useDispatch } from "react-redux";
-import { updateCollections } from "../../redux/shopData/shop.actions";
+import {
+  fetchCollectionsStart,
+} from "../../redux/shopData/shop.actions";
 import WithSpinner from "../../component/withSpinner/withSpinner.component";
 
 const Shop = ({ match }) => {
@@ -18,11 +20,7 @@ const Shop = ({ match }) => {
   const CollectionWithSpinner = WithSpinner(Collection);
 
   useEffect(() => {
-    const collectionRef = firestore.collection("collections");
-    collectionRef.onSnapshot(async (snapshot) => {
-      const collMap = convertCollectionsSnapshotToMap(snapshot);
-      dispatch(updateCollections(collMap));
-    });
+    dispatch(fetchCollectionsStart());
     return () => {};
   }, []);
 
